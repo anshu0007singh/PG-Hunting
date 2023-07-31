@@ -7,7 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class PgHuntingApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(PgHuntingApplication.class, args);
+		System.out.print("hey");
 	}
 
 }
