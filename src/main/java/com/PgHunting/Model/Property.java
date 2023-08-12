@@ -19,7 +19,7 @@ public class Property {
     long pinCode;
 
     @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    @JoinTable(name = "property_propertyType",joinColumns = @JoinColumn(name = "Property_Id",referencedColumnName = "id"),
+    @JoinTable(name = "property_propertyCategories",joinColumns = @JoinColumn(name = "Property_Id",referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "PropertyType_id",referencedColumnName = "id"))
     @JsonIgnore
     Set<Role> roles;

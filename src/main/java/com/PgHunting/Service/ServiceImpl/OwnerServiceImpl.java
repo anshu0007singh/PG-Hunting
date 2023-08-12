@@ -9,6 +9,7 @@ import com.PgHunting.Repository.OwnerRepository;
 import com.PgHunting.Repository.RoleRepository;
 import com.PgHunting.Service.OwnerService;
 import com.PgHunting.util.RegisterDto;
+import com.PgHunting.util.ResponseDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,70 +23,84 @@ public class OwnerServiceImpl implements OwnerService {
 
     @Autowired
     LoginCredentialsRepository loginCredentialsRepository;
-
     @Autowired
     OwnerRepository ownerRepository;
-
     @Autowired
     RoleRepository roleRepository;
-
     @Autowired
     ModelMapper modelMapper;
 
     @Override
-    public RegisterDto registerOwner(RegisterDto registerDto) {
+    public ResponseDto registerOwner(RegisterDto registerDto) {
 
         //Modelmapper conversion dto to entity
         Owner owner = modelMapper.map(registerDto, Owner.class);
         ownerRepository.save(owner);
 
         //setting up the login credentials
-        LoginCredentials newLoginCredentials = new LoginCredentials();
-        newLoginCredentials.setUsername(registerDto.getUserName());
-        newLoginCredentials.setPassword(registerDto.getPassword());
-        newLoginCredentials.setEmail(registerDto.getEmail());
+        LoginCredentials newLoginCredentials = modelMapper.map(registerDto, LoginCredentials.class);
         List<Role> role = new ArrayList<>();
         role.add(roleRepository.findByRole("ROLE_OWNER"));
         Set<Role> roles = role.stream().collect(Collectors.toSet());
         newLoginCredentials.setRoles(roles);
         loginCredentialsRepository.save(newLoginCredentials);
 
-        //Modelmapper conversion entity to dto
-        RegisterDto registerDto1 = modelMapper.map(owner,RegisterDto.class);
-        return registerDto1;
+        return modelMapper.map(owner, ResponseDto.class);
     }
 
     @Override
-    public List<RegisterDto> getAllOwners() {
+    public List<ResponseDto> getAllOwners() {
         return ownerRepository.findAll().stream()
-                .map((owner) -> modelMapper.map(owner, RegisterDto.class))
+                .map((owner) -> modelMapper.map(owner, ResponseDto.class))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public RegisterDto getOwnerById(long ownerId) {
+    public ResponseDto getOwnerById(long ownerId) {
         Owner owner = ownerRepository.findById(ownerId)
-                .orElseThrow(() -> new ResourceNotFoundException(500,"Null Pointer Exception"));
-        return modelMapper.map(owner, RegisterDto.class);
+                .orElseThrow(() -> new ResourceNotFoundException(500," user with id: "+ ownerId +" does not exist"));
+        return modelMapper.map(owner, ResponseDto.class);
     }
 
     @Override
-    public RegisterDto updateOwner(long ownerId, RegisterDto updatedRegisterDto) {
+    public ResponseDto updateOwner(long ownerId, RegisterDto updatedRegisterDto) {
+
+        //changes in owner
         Owner newOwner = modelMapper.map(updatedRegisterDto, Owner.class);
         Owner existingOwner = ownerRepository.findById(ownerId)
-                .orElseThrow(() -> new ResourceNotFoundException(500,"Null Pointer Exception"));
+                .orElseThrow(() -> new ResourceNotFoundException(500," user with id: "+ ownerId +" does not exist"));
+
+        LoginCredentials existingdetails = loginCredentialsRepository.findByUsername(existingOwner.getUsername());
+        if(existingdetails==null){
+            throw new ResourceNotFoundException(500," user with id: "+ ownerId +" does not exist");
+        }
         existingOwner.setEmail(newOwner.getEmail());
         existingOwner.setName(newOwner.getName());
         existingOwner.setMobileNo(newOwner.getMobileNo());
         existingOwner.setUsername(newOwner.getUsername());
         ownerRepository.save(existingOwner);
-        return modelMapper.map(newOwner,RegisterDto.class);
+
+        //changes in login credentials
+        LoginCredentials newloginCredentials = modelMapper.map(updatedRegisterDto,LoginCredentials.class);
+        existingdetails.setPassword(newloginCredentials.getPassword());
+        existingdetails.setUsername(newloginCredentials.getUsername());
+        existingdetails.setEmail(newloginCredentials.getEmail());
+        loginCredentialsRepository.save(existingdetails);
+
+
+        return modelMapper.map(existingOwner,ResponseDto.class);
     }
 
     @Override
     public void deleteById(long ownerId) {
         Owner owner = ownerRepository.findById(ownerId)
-                .orElseThrow(() -> new ResourceNotFoundException(500,"Null Pointer Exception"));
+                .orElseThrow(() -> new ResourceNotFoundException(500," user with id: "+ ownerId +" does not exist"));
         ownerRepository.deleteById(owner.getId());
+
+        LoginCredentials logincredentials = loginCredentialsRepository.findByUsername(owner.getUsername());
+        if(logincredentials==null){
+            new ResourceNotFoundException(500, " user with id: "+ ownerId +" does not exist");
+        }
+        loginCredentialsRepository.deleteById(logincredentials.getId());
     }
 }

@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "property_Type")
+@Table(name = "property_Categories")
 public class PropertyType {
 
     @Id

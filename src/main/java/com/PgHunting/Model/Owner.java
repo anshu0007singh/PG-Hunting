@@ -1,6 +1,11 @@
 package com.PgHunting.Model;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,8 +22,17 @@ public class Owner {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
+
+    @Column(nullable = false)
     String name;
+
+    @Column(nullable = false, unique = true)
     String username;
+
+    @Column(nullable = false)
+    @Email
     String email;
+
+    @Column(nullable = false)
     long mobileNo;
 }

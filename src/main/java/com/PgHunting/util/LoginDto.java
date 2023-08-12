@@ -2,6 +2,6 @@ package com.PgHunting.util;
 
 public class LoginDto {
 
-    String userNameOrEmail;
-    String password;
+    private String userNameOrEmail;
+    private String password;
 }
