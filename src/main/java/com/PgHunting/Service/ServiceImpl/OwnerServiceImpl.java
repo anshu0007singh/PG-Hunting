@@ -33,10 +33,6 @@ public class OwnerServiceImpl implements OwnerService {
     @Override
     public ResponseDto registerOwner(RegisterDto registerDto) {
 
-        //Modelmapper conversion dto to entity
-        Owner owner = modelMapper.map(registerDto, Owner.class);
-        ownerRepository.save(owner);
-
         //setting up the login credentials
         LoginCredentials newLoginCredentials = modelMapper.map(registerDto, LoginCredentials.class);
         List<Role> role = new ArrayList<>();
@@ -44,6 +40,10 @@ public class OwnerServiceImpl implements OwnerService {
         Set<Role> roles = role.stream().collect(Collectors.toSet());
         newLoginCredentials.setRoles(roles);
         loginCredentialsRepository.save(newLoginCredentials);
+
+        //Modelmapper conversion dto to entity
+        Owner owner = modelMapper.map(registerDto, Owner.class);
+        ownerRepository.save(owner);
 
         return modelMapper.map(owner, ResponseDto.class);
     }
