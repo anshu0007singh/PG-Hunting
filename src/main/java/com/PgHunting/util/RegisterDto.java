@@ -22,8 +22,8 @@ public class RegisterDto {
     private String email;
 
     @NotNull(message = "Mobile no. cannot be null")
-    @Min(value = 1000000000, message = "Mobile no. should be at least 10 digits")
-    @Max(value = 9999999999L, message = "Mobile no. should be at most 10 digits")
+    @Min(value = 1000000000, message = "Mobile no. should not be less than 10 digits")
+    @Max(value = 9999999999L, message = "Mobile no. should be not be more than 10 digits")
     private long mobileNo;
 
     @NotBlank(message = "password cannot be null")

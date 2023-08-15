@@ -3,6 +3,7 @@ package com.PgHunting.Controller;
 import com.PgHunting.Service.ServiceImpl.UserServiceImpl;
 import com.PgHunting.util.RegisterDto;
 import com.PgHunting.util.ResponseDto;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class UserController {
     UserServiceImpl userService;
 
     @PostMapping("/register")
-    public ResponseEntity<ResponseDto> register(@RequestBody RegisterDto registerDto){
+    public ResponseEntity<ResponseDto> register(@RequestBody @Valid RegisterDto registerDto){
         return new ResponseEntity<>(userService.register(registerDto), HttpStatus.CREATED);
     }
 
