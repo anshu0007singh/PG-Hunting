@@ -11,6 +11,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name = "Owners")
 @Getter
@@ -35,4 +37,7 @@ public class Owner {
 
     @Column(nullable = false)
     long mobileNo;
+
+    @OneToMany(fetch = FetchType.EAGER , cascade = CascadeType.ALL,orphanRemoval = true)
+    List<Property> properties;
 }

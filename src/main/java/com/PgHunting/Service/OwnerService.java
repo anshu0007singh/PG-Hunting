@@ -1,5 +1,6 @@
 package com.PgHunting.Service;
 
+import com.PgHunting.util.PropertyResponseDto;
 import com.PgHunting.util.RegisterDto;
 import com.PgHunting.util.ResponseDto;
 
@@ -12,6 +13,8 @@ public interface OwnerService {
 
     //Get all Owners
     List<ResponseDto> getAllOwners();
+
+    List<PropertyResponseDto> getAllPropertiesByOwnerId(long ownerId);
 
     //Get Owner By Id
     ResponseDto getOwnerById(long ownerId);

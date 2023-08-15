@@ -3,11 +3,14 @@ package com.PgHunting.Service.ServiceImpl;
 import com.PgHunting.Exception.ResourceNotFoundException;
 import com.PgHunting.Model.LoginCredentials;
 import com.PgHunting.Model.Owner;
+import com.PgHunting.Model.Property;
 import com.PgHunting.Model.Role;
 import com.PgHunting.Repository.LoginCredentialsRepository;
 import com.PgHunting.Repository.OwnerRepository;
+import com.PgHunting.Repository.PropertyRepository;
 import com.PgHunting.Repository.RoleRepository;
 import com.PgHunting.Service.OwnerService;
+import com.PgHunting.util.PropertyResponseDto;
 import com.PgHunting.util.RegisterDto;
 import com.PgHunting.util.ResponseDto;
 import org.modelmapper.ModelMapper;
@@ -27,6 +30,8 @@ public class OwnerServiceImpl implements OwnerService {
     OwnerRepository ownerRepository;
     @Autowired
     RoleRepository roleRepository;
+    @Autowired
+    PropertyRepository propertyRepository;
     @Autowired
     ModelMapper modelMapper;
 
@@ -53,6 +58,21 @@ public class OwnerServiceImpl implements OwnerService {
         return ownerRepository.findAll().stream()
                 .map((owner) -> modelMapper.map(owner, ResponseDto.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PropertyResponseDto> getAllPropertiesByOwnerId(long ownerId) {
+
+        List<Property> tempProperties = propertyRepository.findAll();
+        List<Property> tempSendingData = new ArrayList<>();
+        for(Property property : tempProperties){
+            if(property.getOwner().getId()==ownerId){
+                tempSendingData.add(property);
+            }
+        }
+        List<PropertyResponseDto> properties = tempSendingData.stream().map((prop) -> modelMapper
+                .map(prop,PropertyResponseDto.class)).collect(Collectors.toList());
+        return properties;
     }
 
     @Override

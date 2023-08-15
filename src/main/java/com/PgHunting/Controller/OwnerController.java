@@ -1,6 +1,7 @@
 package com.PgHunting.Controller;
 
 import com.PgHunting.Service.OwnerService;
+import com.PgHunting.util.PropertyResponseDto;
 import com.PgHunting.util.RegisterDto;
 import com.PgHunting.util.ResponseDto;
 import jakarta.validation.Valid;
@@ -30,6 +31,11 @@ public class OwnerController {
     @GetMapping("/getAllOwners")
     public ResponseEntity<List<ResponseDto>> getAllOwners(){
         return new ResponseEntity<>(ownerService.getAllOwners(), HttpStatus.OK);
+    }
+
+    @GetMapping("/getAllPropertiesByOwnerId/{id}")
+    public ResponseEntity<List<PropertyResponseDto>> getAllPropertiesByOwnerId(@PathVariable("id") long ownerId){
+        return new ResponseEntity<>(ownerService.getAllPropertiesByOwnerId(ownerId),HttpStatus.OK);
     }
 
     //Get info of the owner by Id

@@ -34,6 +34,7 @@ public class LoginCredentials {
     @JoinTable(name = "login_person_roles",joinColumns = @JoinColumn(name = "LoginCredentials_Id",referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName = "id"))
     @JsonIgnore
+    @Column(nullable = false)
     Set<Role> roles;
 
 }
