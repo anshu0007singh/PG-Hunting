@@ -1,5 +1,6 @@
 package com.PgHunting.Controller;
 
+import com.PgHunting.Model.PropertyType;
 import com.PgHunting.Service.PropertyService;
 import com.PgHunting.util.PropertyRequestDto;
 import com.PgHunting.util.PropertyResponseDto;
@@ -9,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/property")
@@ -38,4 +41,5 @@ public class PropertyController {
     public ResponseEntity<String> deletePropertyByPropertyId(@PathVariable("id") long propertyId){
         return new ResponseEntity<>(propertyService.deletePropertyByPropertyId(propertyId),HttpStatus.OK);
     }
+
 }

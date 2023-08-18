@@ -27,10 +27,9 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
 
-
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
-        Map<String,String> errors = new HashMap<>();
+        Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getAllErrors().forEach((error) ->{
             String fieldName = ((FieldError)error).getField();
             String message = error.getDefaultMessage();
@@ -39,12 +38,9 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(errors,HttpStatus.BAD_REQUEST);
     }
 
-    // Handling global exception
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorDetails> handleGlobalException(Exception exception, WebRequest webrequest){
-        ErrorDetails errordetails = new ErrorDetails(new Date(),exception.getMessage(),webrequest.getDescription(false));
-        return new ResponseEntity<>(errordetails, HttpStatus.INTERNAL_SERVER_ERROR);
+    //Handle Global Exception
+    public ResponseEntity<ErrorDetails> handleGlobalException(Exception exception, WebRequest webRequest){
+        ErrorDetails error = new ErrorDetails(new Date(), exception.getMessage(), webRequest.getDescription(false));
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
-
-
 }
