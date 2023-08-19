@@ -1,7 +1,7 @@
 package com.PgHunting.Service.ServiceImpl;
 
 import com.PgHunting.Exception.ResourceNotFoundException;
-import com.PgHunting.Model.Role;
+import com.PgHunting.Entity.Role;
 import com.PgHunting.Repository.RoleRepository;
 import com.PgHunting.Service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;

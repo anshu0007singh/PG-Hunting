@@ -1,6 +1,6 @@
 package com.PgHunting.Controller;
 
-import com.PgHunting.Model.PropertyType;
+import com.PgHunting.Entity.PropertyType;
 import com.PgHunting.Service.PropertyTypeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

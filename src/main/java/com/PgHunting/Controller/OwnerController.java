@@ -38,6 +38,11 @@ public class OwnerController {
         return new ResponseEntity<>(ownerService.getAllPropertiesByOwnerId(ownerId),HttpStatus.OK);
     }
 
+    @GetMapping("/getOwnerByUsername/{username}")
+    public ResponseEntity<ResponseDto> getOwnerByUsername(@PathVariable("username") String username){
+        return new ResponseEntity<>(ownerService.getOwnerByUsername(username),HttpStatus.OK);
+    }
+
     //Get info of the owner by Id
     @GetMapping("/getOwnerById/{id}")
     public ResponseEntity<ResponseDto> getOwnerById(@PathVariable("id") long ownerId){

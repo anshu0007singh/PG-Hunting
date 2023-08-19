@@ -1,11 +1,9 @@
 package com.PgHunting.Repository;
 
-import com.PgHunting.Entity.Property;
+import com.PgHunting.Entity.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PropertyRepository extends JpaRepository<Property,Long> {
-
-
+public interface CommentRepository extends JpaRepository<Comment,Long> {
 }

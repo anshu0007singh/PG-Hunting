@@ -1,7 +1,6 @@
 package com.PgHunting.Service;
 
-import com.PgHunting.Model.PropertyType;
-import com.PgHunting.Model.Role;
+import com.PgHunting.Entity.Role;
 
 import java.util.List;
 

@@ -1,10 +1,7 @@
 package com.PgHunting.util;
 
-import com.PgHunting.Model.Owner;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.ManyToOne;
+import com.PgHunting.Entity.Owner;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +18,10 @@ public class PropertyResponseDto {
     double rating;
 
     double price;
+
+    String description;
+
+    String mobileNumber;
 
     String address;
 

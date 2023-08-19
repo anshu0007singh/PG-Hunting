@@ -1,23 +1,27 @@
-package com.PgHunting.Model;
+package com.PgHunting.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-public class PropertyType {
+@Table(name = "Roles")
+public class Role {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
 
-    @NotBlank(message = "Property name cannot be null")
+    @NotBlank(message = "Role cannot be blank")
     @Column(nullable = false, unique = true)
-    String property;
+    String role;
+
+
 }

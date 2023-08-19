@@ -1,7 +1,6 @@
-package com.PgHunting.Model;
+package com.PgHunting.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,6 +26,9 @@ public class Property {
 
     @Column(nullable = false)
     double price;
+
+    @Column(nullable = false)
+    String description;
 
     @Column(nullable = false)
     String address;

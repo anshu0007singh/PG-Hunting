@@ -1,4 +1,4 @@
-package com.PgHunting.Model;
+package com.PgHunting.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

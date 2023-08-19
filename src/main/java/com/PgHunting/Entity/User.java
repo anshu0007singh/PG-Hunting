@@ -1,4 +1,4 @@
-package com.PgHunting.Model;
+package com.PgHunting.Entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;

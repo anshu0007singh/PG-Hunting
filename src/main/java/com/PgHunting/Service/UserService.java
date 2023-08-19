@@ -11,6 +11,8 @@ public interface UserService {
 
     ResponseDto getUserById(long userId);
 
+    ResponseDto getUserByUsername(String username);
+
     List<ResponseDto> getAllUsers();
 
     ResponseDto updateUserById(long userId, RegisterDto registerDto);

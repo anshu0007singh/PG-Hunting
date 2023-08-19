@@ -1,10 +1,10 @@
 package com.PgHunting.Service.ServiceImpl;
 
 import com.PgHunting.Exception.ResourceNotFoundException;
-import com.PgHunting.Model.LoginCredentials;
-import com.PgHunting.Model.Owner;
-import com.PgHunting.Model.Property;
-import com.PgHunting.Model.Role;
+import com.PgHunting.Entity.LoginCredentials;
+import com.PgHunting.Entity.Owner;
+import com.PgHunting.Entity.Property;
+import com.PgHunting.Entity.Role;
 import com.PgHunting.Repository.LoginCredentialsRepository;
 import com.PgHunting.Repository.OwnerRepository;
 import com.PgHunting.Repository.PropertyRepository;
@@ -58,6 +58,11 @@ public class OwnerServiceImpl implements OwnerService {
         return ownerRepository.findAll().stream()
                 .map((owner) -> modelMapper.map(owner, ResponseDto.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public ResponseDto getOwnerByUsername(String username) {
+        return modelMapper.map(ownerRepository.findByUsername(username),ResponseDto.class);
     }
 
     @Override

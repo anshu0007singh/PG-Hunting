@@ -1,21 +1,19 @@
 package com.PgHunting.Service.ServiceImpl;
 
 import com.PgHunting.Exception.ResourceNotFoundException;
-import com.PgHunting.Model.Owner;
-import com.PgHunting.Model.Property;
-import com.PgHunting.Model.PropertyType;
+import com.PgHunting.Entity.Owner;
+import com.PgHunting.Entity.Property;
+import com.PgHunting.Entity.PropertyType;
 import com.PgHunting.Repository.OwnerRepository;
 import com.PgHunting.Repository.PropertyRepository;
 import com.PgHunting.Repository.PropertyTypeRepository;
 import com.PgHunting.Service.PropertyService;
 import com.PgHunting.util.PropertyRequestDto;
 import com.PgHunting.util.PropertyResponseDto;
-import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -72,6 +70,7 @@ public class PropertyServiceImpl implements PropertyService {
         property.setAddress(propertyRequestDto.getAddress());
         property.setPinCode(propertyRequestDto.getPinCode());
         property.setState(propertyRequestDto.getState());
+        property.setDescription(propertyRequestDto.getDescription());
         property.setPrice(propertyRequestDto.getPrice());
         Set<PropertyType> propertyTypes = propertyRequestDto.getType().stream()
                 .map((type) -> propertyTypeRepository.findByProperty(type)).collect(Collectors.toSet());

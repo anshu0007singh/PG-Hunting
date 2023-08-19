@@ -1,12 +1,6 @@
 package com.PgHunting.util;
 
-import com.PgHunting.Model.Owner;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,6 +16,12 @@ public class PropertyRequestDto {
 
     @NotBlank(message = "price cannot be blank")
     double price;
+
+    @NotBlank(message = "Description cannot be null")
+    String description;
+
+    @NotBlank(message = "Mobile number cannot be null")
+    String mobileNumber;
 
     @NotBlank(message = "Address cannot be blank")
     String address;

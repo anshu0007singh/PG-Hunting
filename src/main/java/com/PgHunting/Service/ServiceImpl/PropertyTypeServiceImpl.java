@@ -1,7 +1,7 @@
 package com.PgHunting.Service.ServiceImpl;
 
 import com.PgHunting.Exception.ResourceNotFoundException;
-import com.PgHunting.Model.PropertyType;
+import com.PgHunting.Entity.PropertyType;
 import com.PgHunting.Repository.PropertyTypeRepository;
 import com.PgHunting.Service.PropertyTypeService;
 import org.springframework.beans.factory.annotation.Autowired;

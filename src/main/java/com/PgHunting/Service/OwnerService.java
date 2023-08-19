@@ -14,6 +14,8 @@ public interface OwnerService {
     //Get all Owners
     List<ResponseDto> getAllOwners();
 
+    ResponseDto getOwnerByUsername(String username);
+
     List<PropertyResponseDto> getAllPropertiesByOwnerId(long ownerId);
 
     //Get Owner By Id

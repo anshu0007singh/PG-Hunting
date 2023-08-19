@@ -1,9 +1,9 @@
 package com.PgHunting.Service.ServiceImpl;
 
 import com.PgHunting.Exception.ResourceNotFoundException;
-import com.PgHunting.Model.LoginCredentials;
-import com.PgHunting.Model.Role;
-import com.PgHunting.Model.User;
+import com.PgHunting.Entity.LoginCredentials;
+import com.PgHunting.Entity.Role;
+import com.PgHunting.Entity.User;
 import com.PgHunting.Repository.LoginCredentialsRepository;
 import com.PgHunting.Repository.RoleRepository;
 import com.PgHunting.Repository.UserRepository;
@@ -57,6 +57,11 @@ public class UserServiceImpl implements UserService {
         User user =  userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException(500," User with Id: "+ userId +"doesnot exist"));
         return modelMapper.map(user,ResponseDto.class);
+    }
+
+    @Override
+    public ResponseDto getUserByUsername(String username) {
+        return modelMapper.map(userRepository.findByUsername(username), ResponseDto.class);
     }
 
     @Override
