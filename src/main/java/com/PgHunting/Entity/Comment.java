@@ -26,7 +26,7 @@ public class Comment {
     String body;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Post_id",nullable = false)
+    @JoinColumn(name = "post_id",nullable = false)
     @JsonIgnore
     Post post;
 

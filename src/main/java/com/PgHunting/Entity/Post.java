@@ -30,7 +30,7 @@ public class Post {
     @Column(nullable = false)
     String description;
 
-    @OneToMany(mappedBy = "Post",cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(mappedBy = "post",cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     @JsonIgnore
     List<Comment> comments;
 
